@@ -1,0 +1,149 @@
+:root {
+  --el-text: #0f172a;
+  --el-muted: #475569;
+  --el-bg: #f8fafc;
+  --el-card: #ffffff;
+  --el-border: #e5e7eb;
+  --el-primary: #6d28d9;
+  --el-primary-2: #7c3aed;
+  --el-danger: #dc2626;
+  --el-success: #16a34a;
+}
+
+.el-page {
+  padding: 24px;
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: left;
+  color: var(--el-text);
+}
+
+.el-title {
+  margin: 0 0 16px;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.el-card {
+  background: var(--el-card);
+  border: 1px solid var(--el-border);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.el-stepper {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.el-stepButton {
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--el-border);
+  background: #ffffff;
+  color: var(--el-text);
+  font-weight: 600;
+}
+
+.el-stepButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.el-stepButton.is-active {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.35);
+}
+
+.el-errorBox {
+  margin: 12px 0 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.el-input,
+.el-select,
+.el-textarea {
+  width: 100%;
+}
+
+.el-card input,
+.el-card select,
+.el-card textarea {
+  border-radius: 12px;
+  border: 1px solid var(--el-border);
+  padding: 10px 12px;
+  background: #ffffff;
+  outline: none;
+}
+
+.el-card textarea {
+  resize: vertical;
+}
+
+.el-card input:focus,
+.el-card select:focus,
+.el-card textarea:focus {
+  border-color: rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+}
+
+.el-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.el-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.el-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.el-btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--el-border);
+  background: #ffffff;
+  font-weight: 700;
+  color: var(--el-text);
+}
+
+.el-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.el-btnPrimary {
+  border-color: rgba(124, 58, 237, 0.45);
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.12));
+  color: var(--el-primary-2);
+}
+
+.el-summaryBox {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--el-border);
+  background: linear-gradient(180deg, rgba(109, 40, 217, 0.05), transparent);
+}
+
+.el-summaryRow {
+  margin-top: 8px;
+  color: var(--el-muted);
+  font-weight: 600;
+}
+

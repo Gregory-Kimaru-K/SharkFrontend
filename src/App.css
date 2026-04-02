@@ -1,0 +1,17 @@
+.home {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.home .evt_btn {
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid;
+    border-color: rgba(124, 58, 237, 0.35);
+    border-radius: 20px;
+    width: 48%;
+    padding: 16px 0px;
+    font-size: 2.4rem;
+    font-weight: 100;
+    text-align: center;
+    cursor: pointer;
+}
