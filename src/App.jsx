@@ -2,7 +2,7 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Home'
 import Posts from './Posts'
-import EventLogger from './part1/EventLogger'
+import EventLogger from './Pages/EventLogger'
 
 function App() {
   const router = createBrowserRouter([

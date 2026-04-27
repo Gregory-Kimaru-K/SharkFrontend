@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import './eventLogger.css'
+import '../constants/eventLogger.css'
 
 const OUTCOME_OPTIONS = [
   { value: 'FEEDING', label: 'Feeding observed' },
