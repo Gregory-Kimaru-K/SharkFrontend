@@ -58,6 +58,8 @@ function EventLogger() {
     return sharks.find((s) => String(s.id) === String(selectedSharkId)) || null
   }, [createdShark, selectedSharkId, sharks])
 
+
+  /**FETCH SHARKS */
   useEffect(() => {
     async function loadSharks() {
       setSharksLoading(true)
@@ -114,6 +116,7 @@ function EventLogger() {
     setError(null)
   }
 
+  /** CREATE SHARK */
   async function createSharkIfNeeded() {
     if (sharkMode === 'existing') {
       if (!selectedSharkId) throw new Error('Choose a shark')
@@ -139,6 +142,7 @@ function EventLogger() {
     return shark
   }
 
+    /** CREATE LOCATION */
   async function createLocation() {
     const res = await fetch('https://sharkbackend.onrender.com/api/location/create/', {
       method: 'POST',
@@ -159,6 +163,8 @@ function EventLogger() {
     setCreatedLocation(location)
     return location
   }
+
+  /** CREATE EVENT */
 
   async function createEvent(sharkId, locationId) {
     const sharkNumber = sharkNumberText.trim() === '' ? null : Number(sharkNumberText)
@@ -190,7 +196,9 @@ function EventLogger() {
     setCreatedEnvironmentalData(data?.environmental_data ?? null)
     return event
   }
+  
 
+  /** CREATE OBSERVATION */
   async function createObservation(eventId) {
     let payload = {}
     try {
