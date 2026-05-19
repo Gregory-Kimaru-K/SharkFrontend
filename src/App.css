@@ -1,7 +1,17 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
 .home {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
 }
 .home .evt_btn {
     background: rgba(124, 58, 237, 0.1);
@@ -14,4 +24,89 @@
     font-weight: 100;
     text-align: center;
     cursor: pointer;
+}
+
+.home .divs {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    transition: 0.5s;
+}
+
+.home .events {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 4.2rem;
+    transition: 0.5s;
+}
+
+.home .events .event {
+    position: relative;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    min-height: 140px;
+    box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
+    -webkit-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
+}
+
+.home .events .event h3 {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.home .events .event .ltdt{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+}
+
+/**
+##########
+###############
+####################
+DETAILS
+####################
+###############
+##########
+*/
+
+.filter-components {
+    min-width: 32%;
+    max-width: 32%;
+    max-height: 80vh;
+    padding: 16px;
+    overflow: scroll;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    box-shadow: 0px -1px 50px 13px rgba(0,0,0,0.35);
+    -webkit-box-shadow: 0px -1px 50px 13px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px -1px 50px 13px rgba(0,0,0,0.35);
+}
+
+.filter-components h3 {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.filter-components .details .sum {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family:'Courier New', Courier, monospace;
+    text-transform: uppercase;
+}
+
+.filter-components .details .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }

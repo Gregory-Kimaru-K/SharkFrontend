@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import '../constants/eventLogger.css'
+import { backendUrl } from '../constants/Urls'
 
 const OUTCOME_OPTIONS = [
   { value: 'FEEDING', label: 'Feeding observed' },
@@ -65,9 +66,21 @@ function EventLogger() {
       setSharksLoading(true)
       setSharksError(null)
       try {
-        const res = await fetch('https://sharkbackend.onrender.com/api/sharks/')
+        query =`
+                query AllSharks {
+                    allSharks {
+                        name
+                        species
+                    }
+                }`
+        const res = await fetch(`${backendUrl}qlsciqy/`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(query)
+        })
         const data = await res.json().catch(() => null)
         if (!res.ok) throw new Error(data?.message || 'Failed to load sharks')
+        const datashk = data?.data?.allSharks
         setSharks(Array.isArray(data) ? data : [])
       } catch (e) {
         setSharksError({ message: e?.message ?? 'Failed to load sharks' })
@@ -127,7 +140,7 @@ function EventLogger() {
       throw new Error('Enter shark name and species')
     }
 
-    const res = await fetch('https://sharkbackend.onrender.com/api/shark/create/', {
+    const res = await fetch(`${backendUrl}api/shark/create/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: newSharkName, species: newSharkSpecies }),
@@ -144,7 +157,7 @@ function EventLogger() {
 
     /** CREATE LOCATION */
   async function createLocation() {
-    const res = await fetch('https://sharkbackend.onrender.com/api/location/create/', {
+    const res = await fetch(`${backendUrl}api/location/create/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -173,7 +186,7 @@ function EventLogger() {
     if (sharkNumber == null || Number.isNaN(sharkNumber)) throw new Error('Enter shark number')
     if (!observedAtIso) throw new Error('Enter observed date/time (UTC)')
 
-    const res = await fetch('https://sharkbackend.onrender.com/api/event/create/', {
+    const res = await fetch(`${backendUrl}api/event/create/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -210,7 +223,7 @@ function EventLogger() {
     const recordedAtIso = recordedAtUtc ? new Date(recordedAtUtc).toISOString() : null
     if (!recordedAtIso) throw new Error('Enter recorded date/time (UTC)')
 
-    const res = await fetch('https://sharkbackend.onrender.com/api/observation/create/', {
+    const res = await fetch(`${backendUrl}api/observation/create/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -235,7 +248,7 @@ function EventLogger() {
     const aggression = aggressionText.trim() === '' ? null : Number(aggressionText)
     if (aggression != null && Number.isNaN(aggression)) throw new Error('Aggression must be a number')
 
-    const res = await fetch('https://sharkbackend.onrender.com/api/shark-behaviour/create/', {
+    const res = await fetch(`${backendUrl}api/shark-behaviour/create/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
