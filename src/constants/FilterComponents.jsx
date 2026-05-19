@@ -45,46 +45,91 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
     useEffect(() =>{
         getSharks()
     }, [])
+    // helpers to convert between ISO UTC and datetime-local input values
+    const pad = (n) => String(n).padStart(2, '0')
+    const formatISOToLocalInput = (iso) => {
+        if (!iso) return ''
+        try {
+            const d = new Date(iso)
+            if (Number.isNaN(d.getTime())) return ''
+            const year = d.getFullYear()
+            const month = pad(d.getMonth() + 1)
+            const day = pad(d.getDate())
+            const hours = pad(d.getHours())
+            const mins = pad(d.getMinutes())
+            return `${year}-${month}-${day}T${hours}:${mins}`
+        } catch { return '' }
+    }
+
+    const isoFromLocalInput = (local) => {
+        if (!local) return ''
+        try {
+            // local is like 'YYYY-MM-DDTHH:MM' (browser gives local timezone)
+            const d = new Date(local)
+            if (Number.isNaN(d.getTime())) return ''
+            return d.toISOString()
+        } catch { return '' }
+    }
     // helpers to render numeric min/max inputs
     const NumericPair = ({ baseKey, label }) => (
         <FieldRow>
-            <label>{label}</label>
-            <input type="number" placeholder="min" value={values[baseKey + '__gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
-            <input type="number" placeholder="max" value={values[baseKey + '__lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
+            <div style={{ display: 'flex', gap: 8 }}>
+                <div className="input-group">
+                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '__gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
+                    <label className="user-label">{label} min</label>
+                </div>
+                <div className="input-group">
+                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '__lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
+                    <label className="user-label">{label} max</label>
+                </div>
+            </div>
         </FieldRow>
     )
 
     const TextField = ({ keyName, label, placeholder }) => (
         <FieldRow>
-            <label>{label}:</label>
-            <input placeholder={placeholder || label} value={values[keyName] ?? ''} onChange={e => setVal(keyName, e.target.value)} />
+            <div className="input-group">
+                <input className={`input ${values[keyName] ? 'filled' : ''}`} placeholder=" " value={values[keyName] ?? ''} onChange={e => setVal(keyName, e.target.value)} />
+                <label className="user-label">{label}</label>
+            </div>
         </FieldRow>
     )
 
     const SelectField = ({ keyName, label, options = [] }) => (
         <FieldRow>
-            <label>{label}:</label>
-            <select value={values[keyName] ?? ''} onChange={e => setVal(keyName, e.target.value)}>
-                <option value="">-- any --</option>
-                {options.map((opt, i) => (
-                    <option key={i} value={opt.value}>{opt.label}</option>
-                ))}
-            </select>
+            <div className="input-group" style={{ minWidth: 200 }}>
+                <select className={`input ${values[keyName] ? 'filled' : ''}`} value={values[keyName] ?? ''} onChange={e => setVal(keyName, e.target.value)}>
+                    <option value="">-- any --</option>
+                    {options.map((opt, i) => (
+                        <option key={i} value={opt.value}>{opt.label}</option>
+                    ))}
+                </select>
+                <label className="user-label">{label}</label>
+            </div>
         </FieldRow>
     )
 
     const DateRange = ({ baseKey, label }) => (
         <FieldRow>
-            <label>{label}:</label>
-            <input type="date" value={values[baseKey + '__gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
-            <input type="date" value={values[baseKey + '__lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
+            <div style={{ display: 'flex', gap: 8 }}>
+                <div className="input-group">
+                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '__gte']) ?? ''} onChange={e => setVal(baseKey + '__gte', isoFromLocalInput(e.target.value))} />
+                    <label className="user-label">{label} from</label>
+                </div>
+                <div className="input-group">
+                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '__lte']) ?? ''} onChange={e => setVal(baseKey + '__lte', isoFromLocalInput(e.target.value))} />
+                    <label className="user-label">{label} to</label>
+                </div>
+            </div>
         </FieldRow>
     )
 
     const BooleanField = ({ keyName, label }) => (
         <FieldRow>
-            <label>{label}:</label>
-            <input type="checkbox" checked={!!values[keyName]} onChange={e => setVal(keyName, e.target.checked)} />
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <input type="checkbox" checked={!!values[keyName]} onChange={e => setVal(keyName, e.target.checked)} />
+                {label}
+            </label>
         </FieldRow>
     )
 
