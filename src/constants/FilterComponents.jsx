@@ -75,11 +75,11 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
         <FieldRow>
             <div style={{ display: 'flex', gap: 8 }}>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '__gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
+                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
                     <label className="user-label">{label} min</label>
                 </div>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '__lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
+                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
                     <label className="user-label">{label} max</label>
                 </div>
             </div>
@@ -155,55 +155,62 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
         <details open className='details'>
             <summary className='sum'>Basic</summary>
             <div className='filters'>
-                {TextField({ keyName: 'title__icontains', label: 'Title contains' })}
+                {TextField({ keyName: 'title__Icontains', label: 'Title contains' })}
                 {SelectField({
-                    keyName: 'shark_type__name__icontains',
+                    keyName: 'sharkType_Species',
                     label: 'Shark type',
-                    options: (sharks || []).map(s => ({ value: s.name || s.species || '', label: s.species ? `${s.name} (${s.species})` : s.name }))
+                    options: (sharks || []).map(s => ({ value: s.species || '', label: s.species ? `${s.name} (${s.species})` : s.name }))
                 })}
                 {NumericPair({ baseKey: "shark_number", label: "Shark Number" })}
-                {BooleanField({ keyName: 'is_processed__exact', label: 'Processed' })}
+                {BooleanField({ keyName: 'isProcessed', label: 'Processed' })}
             </div>
         </details>
 
         <details className='details'>
             <summary className='sum'>Location</summary>
             <div className='filters'>
-                {TextField({ keyName: 'location__name__icontains', label: 'Location name' })}
-                {TextField({ keyName: 'location__region__icontains', label: 'Region' })}
-                {TextField({ keyName: 'location__country__icontains', label: 'Country' })}
-                {NumericPair({ baseKey: 'location__latitude', label: 'Latitude' })}
-                {NumericPair({ baseKey: 'location__longitude', label: 'Longitude' })}
+                {TextField({ keyName: 'location_Name_Icontains', label: 'Location name' })}
+                {TextField({ keyName: 'location_Region_Icontains', label: 'Region' })}
+                {TextField({ keyName: 'location_Country', label: 'Country' })}
+                {NumericPair({ baseKey: 'location_Latitude', label: 'Latitude' })}
+                {NumericPair({ baseKey: 'location_Longitude', label: 'Longitude' })}
             </div>
         </details>
 
         <details className='details'>
             <summary className='sum'>Environmental</summary>
             <div className='filters'>
-                {NumericPair({ baseKey: 'environmental_data__pressure', label: 'Pressure' })}
-                {NumericPair({ baseKey: 'environmental_data__wind_speed', label: 'Wind speed' })}
-                {NumericPair({ baseKey: 'environmental_data__temperature', label: 'Temperature' })}
-                {NumericPair({ baseKey: 'environmental_data__water_temperature', label: 'Water temperature' })}
-                {NumericPair({ baseKey: 'environmental_data__tide_height', label: 'Tide height' })}
-                {NumericPair({ baseKey: 'environmental_data__current_speed', label: 'Current speed' })}
+                {NumericPair({ baseKey: 'environmentalData_Pressure', label: 'Pressure' })}
+                {NumericPair({ baseKey: 'environmentalData_WindSpeed', label: 'Wind speed' })}
+                {NumericPair({ baseKey: 'environmentalData_Temperature', label: 'Temperature' })}
+                {NumericPair({ baseKey: 'environmentalData_WaterTemperature', label: 'Water temperature' })}
+                {NumericPair({ baseKey: 'environmentalData_TideHeight', label: 'Tide height' })}
+                {NumericPair({ baseKey: 'environmentalData_CurrentSpeed', label: 'Current speed' })}
+                {NumericPair({ baseKey: "environmentalData_RelativeHumidity", label: "Relative Humidity" })}
+                {NumericPair({ baseKey: "environmentalData_CloudCover", label: "Cloud Cover" })}
+                {NumericPair({ baseKey: "environmentalData_Conductivity", label: "Conductivity" })}
+                {NumericPair({ baseKey: "environmentalData_CurrentDirection", label: "Current Direction" })}
             </div>
         </details>
 
         <details className='details'>
             <summary className='sum'>Solar / Lunar</summary>
             <div className='filters'>
-                {DateRange({ baseKey: 'environmental_data__sunrise', label: 'Sunrise' })}
-                {DateRange({ baseKey: 'environmental_data__sunset', label: 'Sunset' })}
-                {TextField({ keyName: 'environmental_data__moon_phase__icontains', label: 'Moon phase' })}
-                {NumericPair({ baseKey: 'environmental_data__illumination', label: 'Illumination' })}
+                {DateRange({ baseKey: 'environmentalData_Sunrise', label: 'Sunrise' })}
+                {DateRange({ baseKey: 'environmentalData_Sunset', label: 'Sunset' })}
+                {TextField({ keyName: 'environmentalData_MoonPhase', label: 'Moon phase' })}
+                {DateRange({ baseKey: "environmentalData_Moonrise", label: "Moon Rise" })}
+                {DateRange({ baseKey: "environmentalData_Moonset", label: "Moon Set" })}
+                {NumericPair({ baseKey: "environmentalData_PhaseAngle", label: "Phase Angle" })}
+                {NumericPair({ baseKey: 'environmentalData_Illumination', label: 'Illumination' })}
             </div>
         </details>
 
         <details className='details'>
             <summary className='sum'>Behaviour</summary>
             <div className='filters'>
-                {BooleanField({ keyName: 'behaviour__feeding__exact', label: 'Feeding' })}
-                {NumericPair({ baseKey: 'behaviour__aggression', label: 'Aggression' })}
+                {BooleanField({ keyName: 'behaviour_Feeding', label: 'Feeding' })}
+                {NumericPair({ baseKey: 'behaviour_Aggression', label: 'Aggression' })}
             </div>
         </details>
 

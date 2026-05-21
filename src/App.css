@@ -53,6 +53,7 @@
     box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
     -webkit-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
     -moz-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.33);
+    cursor: pointer;
 }
 
 .home .events .event h3 {
@@ -128,8 +129,8 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: rgba(99,102,241,0.9);
-    box-shadow: 0 6px 18px rgba(99,102,241,0.12);
+    border-color: rgba(79,70,229,0.95); /* stronger indigo */
+    box-shadow: 0 10px 30px rgba(79,70,229,0.14);
     transform: translateY(-1px);
 }
 
@@ -209,7 +210,7 @@ select {
 .input:focus ~ .user-label,
 .input.filled ~ .user-label {
     transform: translateY(-140%) scale(0.85);
-    color: #6d28d9; /* purple */
+    color: #4f46e5; /* indigo accent */
     background: white;
 }
 
@@ -217,13 +218,14 @@ select {
 .input[type="datetime-local"] ~ .user-label,
 select.input ~ .user-label {
     transform: translateY(-140%) scale(0.85);
+    color: #4f46e5;
     background: white;
 }
 
 /* Make datetime and select inputs look focused always */
 .input[type="datetime-local"],
 select.input {
-    box-shadow: 0 6px 18px rgba(99,102,241,0.12);
+    box-shadow: 0 10px 30px rgba(79,70,229,0.14);
     transform: translateY(-1px);
 }
 
@@ -233,14 +235,88 @@ select.input {
 
 /* subtle different focus color for datetime */
 input[type="datetime-local"].input:focus {
-    border-color: rgba(99,102,241,0.9);
+    border-color: rgba(79,70,229,0.95);
 }
 input[type="datetime-local"].input:focus ~ .user-label {
-    color: #1e3a8a; /* blue */
+    color: #4f46e5;
 }
 
 .input-group .user-label::after {
     content: '';
     display: inline-block;
     width: 8px;
+}
+
+/* Posts / Event detail styles */
+.pscontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px 12px;
+}
+
+.post {
+    width: min(1100px, 96%);
+    background: linear-gradient(180deg, #ffffff, #f7fbff);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 12px 40px rgba(2,6,23,0.08);
+    border: 1px solid rgba(2,6,23,0.06);
+}
+
+.post-title {
+    font-size: 1.6rem;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 20px;
+    align-items: start;
+}
+
+.post-structured {
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(2,6,23,0.06);
+}
+
+.post-row {
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #eef4ff;
+    border: 1px solid rgba(15,23,42,0.04);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.post-key {
+    min-width: 160px;
+    color: #071133;
+    font-weight: 700;
+}
+
+.post-value {
+    color: #0b1220;
+    flex: 1;
+}
+
+.post-json {
+    background: #071133; /* deep navy */
+    color: #f8fafc; /* off-white */
+    padding: 12px;
+    border-radius: 8px;
+    max-height: 70vh;
+    overflow: auto;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+    .post-grid { grid-template-columns: 1fr; }
+    .post-key { min-width: 120px; }
 }

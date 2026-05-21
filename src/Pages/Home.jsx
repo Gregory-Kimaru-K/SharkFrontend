@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import FilterComponents from './constants/FilterComponents'
-import { backendUrl } from './constants/Urls'
+import FilterComponents from '../constants/FilterComponents'
+import { backendUrl } from '../constants/Urls'
 
 const formatDate = (iso) => {
   if (!iso) return ''
@@ -84,6 +84,7 @@ function Home() {
     fetchEvents(null, false)
   }
 
+  useEffect(() => {console.log(filters)}, [filters])
   useEffect(() => {
     if (!sentinelRef.current) return
     const observer = new IntersectionObserver(entries => {
@@ -98,6 +99,11 @@ function Home() {
     return () => observer.disconnect()
   }, [nextPage, isNext, loading])
 
+  const postNav = (id) => {
+    const decoded = atob(id)
+    console.log(id)
+    console.log(decoded)
+  }
   return (
     <div className='home'>
       <div className='evt_btn' onClick={() => navigate("/event/create/")}>Add an event</div>
@@ -105,7 +111,7 @@ function Home() {
         <FilterComponents onApply={applyFilters} onClear={clearFilters} initial={filters} />
         <div className='events'>
           {events.map((event, idx) => (
-            <div className='event' key={event?.id || idx}>
+            <div className='event' key={event?.id || idx} onClick={() => navigate(`/post/${event?.id}`)}>
               <h3>{event?.title || 'Untitled'}</h3>
               <div className='ltdt'>
                 <p className='location'>
