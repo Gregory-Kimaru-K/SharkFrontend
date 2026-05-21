@@ -75,11 +75,11 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
         <FieldRow>
             <div style={{ display: 'flex', gap: 8 }}>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Gte'] ?? ''} onChange={e => setVal(baseKey + '__gte', e.target.value)} />
+                    <input className={`input ${values[baseKey + '_Gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Gte'] ?? ''} onChange={e => setVal(baseKey + '_Gte', e.target.value)} />
                     <label className="user-label">{label} min</label>
                 </div>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Lte'] ?? ''} onChange={e => setVal(baseKey + '__lte', e.target.value)} />
+                    <input className={`input ${values[baseKey + '_Gte'] ? 'filled' : ''}`} type="number" placeholder=" " value={values[baseKey + '_Lte'] ?? ''} onChange={e => setVal(baseKey + '_Lte', e.target.value)} />
                     <label className="user-label">{label} max</label>
                 </div>
             </div>
@@ -113,11 +113,11 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
         <FieldRow>
             <div style={{ display: 'flex', gap: 8 }}>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__gte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '__gte']) ?? ''} onChange={e => setVal(baseKey + '__gte', isoFromLocalInput(e.target.value))} />
+                    <input className={`input ${values[baseKey + '_Gte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '_Gte']) ?? ''} onChange={e => setVal(baseKey + '_Gte', isoFromLocalInput(e.target.value))} />
                     <label className="user-label">{label} from</label>
                 </div>
                 <div className="input-group">
-                    <input className={`input ${values[baseKey + '__lte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '__lte']) ?? ''} onChange={e => setVal(baseKey + '__lte', isoFromLocalInput(e.target.value))} />
+                    <input className={`input ${values[baseKey + '_Lte'] ? 'filled' : ''}`} type="datetime-local" placeholder=" " value={formatISOToLocalInput(values[baseKey + '_Lte']) ?? ''} onChange={e => setVal(baseKey + '_Lte', isoFromLocalInput(e.target.value))} />
                     <label className="user-label">{label} to</label>
                 </div>
             </div>
@@ -155,13 +155,13 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
         <details open className='details'>
             <summary className='sum'>Basic</summary>
             <div className='filters'>
-                {TextField({ keyName: 'title__Icontains', label: 'Title contains' })}
+                {TextField({ keyName: 'title_Icontains', label: 'Title contains' })}
                 {SelectField({
                     keyName: 'sharkType_Species',
                     label: 'Shark type',
                     options: (sharks || []).map(s => ({ value: s.species || '', label: s.species ? `${s.name} (${s.species})` : s.name }))
                 })}
-                {NumericPair({ baseKey: "shark_number", label: "Shark Number" })}
+                {NumericPair({ baseKey: "sharkNumber", label: "Shark Number" })}
                 {BooleanField({ keyName: 'isProcessed', label: 'Processed' })}
             </div>
         </details>
@@ -189,7 +189,6 @@ function FilterComponents({ onApply, onClear, initial = {} }) {
                 {NumericPair({ baseKey: "environmentalData_RelativeHumidity", label: "Relative Humidity" })}
                 {NumericPair({ baseKey: "environmentalData_CloudCover", label: "Cloud Cover" })}
                 {NumericPair({ baseKey: "environmentalData_Conductivity", label: "Conductivity" })}
-                {NumericPair({ baseKey: "environmentalData_CurrentDirection", label: "Current Direction" })}
             </div>
         </details>
 
