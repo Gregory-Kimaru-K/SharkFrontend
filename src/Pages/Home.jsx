@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FilterComponents from '../constants/FilterComponents'
 import { backendUrl } from '../constants/Urls'
+import Nav from '../constants/Nav'
 
 const formatDate = (iso) => {
   if (!iso) return ''
@@ -291,6 +292,7 @@ function Home() {
   }
   return (
     <div className='home'>
+        <Nav />
       <div className='evt_btn' onClick={() => navigate("/event/create/")}>Add an event</div>
       <div className='divs'>
         <FilterComponents onApply={applyFilters} onClear={clearFilters} initial={filters} />
