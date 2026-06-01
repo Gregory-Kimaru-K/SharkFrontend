@@ -292,7 +292,6 @@ function Home() {
   }
   return (
     <div className='home'>
-        <Nav />
       <div className='evt_btn' onClick={() => navigate("/event/create/")}>Add an event</div>
       <div className='divs'>
         <FilterComponents onApply={applyFilters} onClear={clearFilters} initial={filters} />
